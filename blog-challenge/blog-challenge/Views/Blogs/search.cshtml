@@ -28,6 +28,8 @@
 
     @foreach (var item in Model)
     {
+        if(item.Bactive==true)
+        { 
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.Bttitle)
@@ -41,6 +43,7 @@
                 @Html.ActionLink("Delete", "Delete", new { id = item.Bid })
             </td>
         </tr>
+        }
     }
 
 </table>

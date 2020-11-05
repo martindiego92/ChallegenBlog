@@ -14,7 +14,7 @@
 
     @foreach (var item in Model)
     {
-        if(item.Bid==20)
+        if(item.Bactive==true)
         { 
         <tr>
 
@@ -41,7 +41,7 @@
                 @Html.ActionLink("Delete", "Delete", new { id = item.Bid })
             </td>
         </tr>
-    }
+        }
     }
 
 </table>

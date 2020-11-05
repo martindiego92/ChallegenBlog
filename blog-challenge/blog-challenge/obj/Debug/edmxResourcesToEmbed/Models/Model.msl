@@ -4,6 +4,7 @@
     <EntitySetMapping Name="Blog">
       <EntityTypeMapping TypeName="blogModel.Blog">
         <MappingFragment StoreEntitySet="Blog">
+          <ScalarProperty Name="Bactive" ColumnName="Bactive" />
           <ScalarProperty Name="Bimage" ColumnName="Bimage" />
           <ScalarProperty Name="BDate" ColumnName="BDate" />
           <ScalarProperty Name="BCategory" ColumnName="BCategory" />

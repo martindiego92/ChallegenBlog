@@ -48,10 +48,19 @@ namespace blog_challenge.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Bid,Bttitle,Bcontent,BCategory,BDate,Bimage")] Blog blog)
         {
+         
             if (ModelState.IsValid)
             {
                 db.Blog.Add(blog);
+
+
+                
+                    blog.Bactive = true;
+                    
+                
+
                 db.SaveChanges();
+
                 return RedirectToAction("Index");
             }
 
@@ -109,10 +118,21 @@ namespace blog_challenge.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Blog blog = db.Blog.Find(id);
-            db.Blog.Remove(blog);
-            db.SaveChanges();
-            return RedirectToAction("Index");
+            //  Blog blog = db.Blog.Find(id);
+            //db.Blog.Remove(blog);
+            //var search = from s in db.Blog select s;
+            //  Blog bg = new Blog();
+            //bg.Bactive = false;
+
+            using (var db = new blogEntities1())
+            {
+                var user = db.Blog.Find(id);
+                user.Bactive = false;
+                db.Entry(user).State = System.Data.Entity.EntityState.Modified;
+                db.SaveChanges();
+            }
+                //db.SaveChanges();
+                return RedirectToAction("Index");
         }
 
         protected override void Dispose(bool disposing)
