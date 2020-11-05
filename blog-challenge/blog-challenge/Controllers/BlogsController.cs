@@ -92,6 +92,7 @@ namespace blog_challenge.Controllers
             if (ModelState.IsValid)
             {
                 db.Entry(blog).State = EntityState.Modified;
+                blog.Bactive = true;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -117,13 +118,13 @@ namespace blog_challenge.Controllers
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
-        {
-            //  Blog blog = db.Blog.Find(id);
-            //db.Blog.Remove(blog);
-            //var search = from s in db.Blog select s;
-            //  Blog bg = new Blog();
-            //bg.Bactive = false;
-
+        {/*
+          Blog blog = db.Blog.Find(id);
+           db.Blog.Remove(blog);
+            var search = from s in db.Blog select s;
+              Blog bg = new Blog();
+            bg.Bactive = false;
+            */
             using (var db = new blogEntities1())
             {
                 var user = db.Blog.Find(id);
@@ -164,6 +165,25 @@ namespace blog_challenge.Controllers
                 search = search.Where(s => s.Bttitle.Contains(tittle));
             }
             return View(search.ToList());
+        }
+        public ActionResult Deleted(int? id)
+        {
+            return View(db.Blog.ToList());
+            
+        }
+        [HttpPost, ActionName("Restore")]
+        [ValidateAntiForgeryToken]
+        public ActionResult Restore(int? id)
+        {
+            using (var db = new blogEntities1())
+            {
+                var user = db.Blog.Find(id);
+                user.Bactive = true;
+                db.Entry(user).State = System.Data.Entity.EntityState.Modified;
+                db.SaveChanges();
+            }
+            //db.SaveChanges();
+            return RedirectToAction("Index");
         }
         
     }
