@@ -1,0 +1,46 @@
+﻿@model IEnumerable<blog_challenge.Models.Blog>
+
+@{
+    ViewBag.Title = "search";
+}
+
+<h2>search</h2>
+
+
+
+@using (Html.BeginForm())
+{
+    <p>
+        Buscar por titulo: @Html.TextBox("tittle")
+        <input type="submit" value="Search" />
+    </p>
+}
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Bttitle)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BDate)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Bttitle)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BDate)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.Bid }) |
+              
+                @Html.ActionLink("Delete", "Delete", new { id = item.Bid })
+            </td>
+        </tr>
+    }
+
+</table>

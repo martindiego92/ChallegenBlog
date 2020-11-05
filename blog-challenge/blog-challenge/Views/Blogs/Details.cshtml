@@ -1,0 +1,20 @@
+﻿@model blog_challenge.Models.Blog
+
+@{
+    ViewBag.Title = "Details";
+}
+
+
+<h2>@Html.DisplayFor(itemModel=>itemModel.Bttitle)</h2>
+
+<div>
+
+
+    <td>@Html.DisplayFor(modelItem => modelItem.Bcontent) </td>
+    <td>@Html.DisplayFor(modelItem => modelItem.Bimage)</td>
+
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Bid }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

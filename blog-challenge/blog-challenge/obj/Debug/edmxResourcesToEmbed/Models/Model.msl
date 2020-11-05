@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="blogModelStoreContainer" CdmEntityContainer="blogEntities1">
+    <EntitySetMapping Name="Blog">
+      <EntityTypeMapping TypeName="blogModel.Blog">
+        <MappingFragment StoreEntitySet="Blog">
+          <ScalarProperty Name="Bimage" ColumnName="Bimage" />
+          <ScalarProperty Name="BDate" ColumnName="BDate" />
+          <ScalarProperty Name="BCategory" ColumnName="BCategory" />
+          <ScalarProperty Name="Bcontent" ColumnName="Bcontent" />
+          <ScalarProperty Name="Bttitle" ColumnName="Bttitle" />
+          <ScalarProperty Name="Bid" ColumnName="Bid" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

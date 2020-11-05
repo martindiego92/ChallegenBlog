@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="blogModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="blogEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Blog" EntityType="blogModel.Blog" />
+  </EntityContainer>
+  <EntityType Name="Blog">
+    <Key>
+      <PropertyRef Name="Bid" />
+    </Key>
+    <Property Name="Bid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Bttitle" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="Bcontent" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+    <Property Name="BCategory" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+    <Property Name="BDate" Type="DateTime" Precision="0" />
+    <Property Name="Bimage" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+</Schema>

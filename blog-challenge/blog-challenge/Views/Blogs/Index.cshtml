@@ -1,0 +1,47 @@
+﻿@model IEnumerable<blog_challenge.Models.Blog>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>List of Blogs</h2>
+
+
+<table class="table">
+
+
+
+
+    @foreach (var item in Model)
+    {
+        if(item.Bid==20)
+        { 
+        <tr>
+
+            <td>
+
+                <a href="~/Blogs/Details/@item.Bid">   <b style="color:brown;font-size:30px;"> @Html.DisplayFor(modelItem => item.Bttitle)</b></a>
+            </td>
+
+        <td>@Html.DisplayFor(modelItem => item.BDate) </td>
+
+
+        </tr>
+
+
+        <td>
+            @Html.DisplayFor(modeItem=>item.Bcontent)
+        </td>
+       
+        <tr>
+
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.Bid }) |
+
+                @Html.ActionLink("Delete", "Delete", new { id = item.Bid })
+            </td>
+        </tr>
+    }
+    }
+
+</table>
