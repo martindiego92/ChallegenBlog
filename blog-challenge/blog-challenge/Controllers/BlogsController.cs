@@ -5,9 +5,10 @@ using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Web;
+using System.Web.Helpers;
 using System.Web.Mvc;
 using blog_challenge.Models;
-
+using System.IO;
 namespace blog_challenge.Controllers
 {
     public class BlogsController : Controller
@@ -46,22 +47,20 @@ namespace blog_challenge.Controllers
         // más detalles, vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Bid,Bttitle,Bcontent,BCategory,BDate,Bimage")] Blog blog)
+        public ActionResult Create([Bind(Include = "Bid,Bttitle,Bcontent,BCategory,BDate,Bimagen")] Blog blog)
         {
-         
+            HttpPostedFileBase file = Request.Files["ImageData"];
+            byte[] imageBytes = ConvertToBytes(file);
+
+          
             if (ModelState.IsValid)
             {
+                blog.Bactive = true;
+                blog.Bimagen = imageBytes;
                 db.Blog.Add(blog);
-
-
-                
-                    blog.Bactive = true;
-                    
-                
-
                 db.SaveChanges();
-
                 return RedirectToAction("Index");
+
             }
 
             return View(blog);
@@ -132,8 +131,8 @@ namespace blog_challenge.Controllers
                 db.Entry(user).State = System.Data.Entity.EntityState.Modified;
                 db.SaveChanges();
             }
-                //db.SaveChanges();
-                return RedirectToAction("Index");
+            //db.SaveChanges();
+            return RedirectToAction("Index");
         }
 
         protected override void Dispose(bool disposing)
@@ -144,18 +143,18 @@ namespace blog_challenge.Controllers
             }
             base.Dispose(disposing);
         }
-     //GET: Blogs
-      /*  public ActionResult search(int? id)
-        {
-            var busqueda = from s in db.Blog select s;
+        //GET: Blogs
+        /*  public ActionResult search(int? id)
+          {
+              var busqueda = from s in db.Blog select s;
 
-            if (id!=null)
-            {
-                busqueda = busqueda.Where(s => s.Bid == id);
-            }
-            return View(busqueda.ToList());
-        }
-       */
+              if (id!=null)
+              {
+                  busqueda = busqueda.Where(s => s.Bid == id);
+              }
+              return View(busqueda.ToList());
+          }
+         */
         public ActionResult search(string tittle)
         {
             var search = from s in db.Blog select s;
@@ -169,7 +168,7 @@ namespace blog_challenge.Controllers
         public ActionResult Deleted(int? id)
         {
             return View(db.Blog.ToList());
-            
+
         }
         [HttpPost, ActionName("Restore")]
         [ValidateAntiForgeryToken]
@@ -185,6 +184,22 @@ namespace blog_challenge.Controllers
             //db.SaveChanges();
             return RedirectToAction("Index");
         }
-        
+
+
+        private byte[] ConvertToBytes(HttpPostedFileBase image)
+        {
+            try
+            {
+                byte[] imageBytes;
+                BinaryReader reader = new BinaryReader(image.InputStream);
+                imageBytes = reader.ReadBytes((int)image.ContentLength);
+                return imageBytes;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+        }
     }
 }

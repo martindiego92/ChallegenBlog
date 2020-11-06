@@ -16,6 +16,7 @@
           <Property Name="BDate" Type="date" />
           <Property Name="Bimage" Type="image" />
           <Property Name="Bactive" Type="bit" />
+          <Property Name="Bimagen" Type="varbinary(max)" />
         </EntityType>
         <EntityContainer Name="blogModelStoreContainer">
           <EntitySet Name="Blog" EntityType="Self.Blog" Schema="dbo" store:Type="Tables" />
@@ -38,6 +39,7 @@
           <Property Name="BDate" Type="DateTime" Precision="0" />
           <Property Name="Bimage" Type="Binary" MaxLength="Max" FixedLength="false" />
           <Property Name="Bactive" Type="Boolean" />
+          <Property Name="Bimagen" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -48,6 +50,7 @@
           <EntitySetMapping Name="Blog">
             <EntityTypeMapping TypeName="blogModel.Blog">
               <MappingFragment StoreEntitySet="Blog">
+                <ScalarProperty Name="Bimagen" ColumnName="Bimagen" />
                 <ScalarProperty Name="Bactive" ColumnName="Bactive" />
                 <ScalarProperty Name="Bimage" ColumnName="Bimage" />
                 <ScalarProperty Name="BDate" ColumnName="BDate" />

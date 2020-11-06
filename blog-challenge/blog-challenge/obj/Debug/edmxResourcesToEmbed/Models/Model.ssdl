@@ -11,6 +11,7 @@
     <Property Name="BDate" Type="date" />
     <Property Name="Bimage" Type="image" />
     <Property Name="Bactive" Type="bit" />
+    <Property Name="Bimagen" Type="varbinary(max)" />
   </EntityType>
   <EntityContainer Name="blogModelStoreContainer">
     <EntitySet Name="Blog" EntityType="Self.Blog" Schema="dbo" store:Type="Tables" />

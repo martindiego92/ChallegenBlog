@@ -14,5 +14,6 @@
     <Property Name="BDate" Type="DateTime" Precision="0" />
     <Property Name="Bimage" Type="Binary" MaxLength="Max" FixedLength="false" />
     <Property Name="Bactive" Type="Boolean" />
+    <Property Name="Bimagen" Type="Binary" MaxLength="Max" FixedLength="false" />
   </EntityType>
 </Schema>
