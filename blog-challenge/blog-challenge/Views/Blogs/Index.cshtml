@@ -20,10 +20,10 @@
 
         <td>
 
-            <a href="~/Blogs/Details/@item.Bid">   <b style="color:brown;font-size:30px;"> @Html.DisplayFor(modelItem => item.Bttitle)</b></a>
+            <a href="~/Blogs/Details/@item.Bid">   <b style="color:brown;font-size:40px;"> @Html.DisplayFor(modelItem => item.Bttitle)</b></a>
         </td>
         <td>
-            <img src="@Url.Action("RetrieveImage","Blogs",new {id=item.Bid})" />
+            <img width="100px" src="@Url.Action("RetrieveImage","Blogs",new {id=item.Bid})" />
         </td>
 
         <td>@Html.DisplayFor(modelItem => item.BDate) </td>

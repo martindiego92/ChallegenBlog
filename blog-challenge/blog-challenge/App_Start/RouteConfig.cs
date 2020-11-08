@@ -16,7 +16,7 @@ namespace blog_challenge
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Blogs", action = "Index", id = UrlParameter.Optional }
+                defaults: new { controller = "Jasmine", action = "Run", id = UrlParameter.Optional }
             );
         }
     }

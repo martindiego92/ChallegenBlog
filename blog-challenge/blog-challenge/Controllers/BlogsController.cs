@@ -146,6 +146,7 @@ namespace blog_challenge.Controllers
             */
             using (var db = new blogEntities1())
             {
+                
                 var user = db.Blog.Find(id);
                 user.Bactive = false;
                 db.Entry(user).State = System.Data.Entity.EntityState.Modified;

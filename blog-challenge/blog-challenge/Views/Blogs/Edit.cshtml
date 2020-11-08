@@ -28,7 +28,9 @@
     <div class="form-group">
         @Html.LabelFor(model => model.Bcontent, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.EditorFor(model => model.Bcontent, new { htmlAttributes = new { @class = "form-control" } })
+
+            @Html.TextAreaFor(m => m.Bcontent, new { @class = "form-control", @style = "widht: 100px " })
+
             @Html.ValidationMessageFor(model => model.Bcontent, "", new { @class = "text-danger" })
         </div>
     </div>
@@ -36,7 +38,18 @@
     <div class="form-group">
         @Html.LabelFor(model => model.BCategory, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.EditorFor(model => model.BCategory, new { htmlAttributes = new { @class = "form-control" } })
+            @*Html.EditorFor(model => model.BCategory, new { htmlAttributes = new { @class = "form-control" } })*@
+            <select name="@Html.NameFor(model => model.BCategory)">
+
+                <option value="" selected disabled>--Select category</option>
+                <option>Food</option>
+                <option>Travel</option>
+                <option>Music</option>
+                <option>Movies</option>
+                <option>Sports</option>
+            </select>
+
+
             @Html.ValidationMessageFor(model => model.BCategory, "", new { @class = "text-danger" })
         </div>
     </div>
@@ -45,7 +58,10 @@
     <div class="form-group">
         @Html.LabelFor(model => model.BDate, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.EditorFor(model => model.BDate, new { htmlAttributes = new { @class = "form-control" } })
+            @*Html.EditorFor(model => model.BDate, new { htmlAttributes = new { @class = "form-control" } })*@
+            @Html.TextBoxFor(model => model.BDate, "{0:yyyy-MM-dd}", new { @class = "form-control", @type = "date" })
+
+
             @Html.ValidationMessageFor(model => model.BDate, "", new { @class = "text-danger" })
         </div>
     </div>
