@@ -9,6 +9,9 @@ using System.Web.Helpers;
 using System.Web.Mvc;
 using blog_challenge.Models;
 using System.IO;
+using System.Drawing;
+using System.Drawing.Imaging;
+
 namespace blog_challenge.Controllers
 {
     public class BlogsController : Controller
@@ -17,13 +20,17 @@ namespace blog_challenge.Controllers
 
         // GET: Blogs
         public ActionResult Index()
+
         {
+
             return View(db.Blog.ToList());
         }
 
         // GET: Blogs/Details/5
         public ActionResult Details(int? id)
         {
+            HttpPostedFileBase file = Request.Files["ImageData"];
+            byte[] imageBytes = ConvertToBytes(file);
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -49,14 +56,18 @@ namespace blog_challenge.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Bid,Bttitle,Bcontent,BCategory,BDate,Bimagen")] Blog blog)
         {
+            
             HttpPostedFileBase file = Request.Files["ImageData"];
+            if(file!=null)
+            { 
             byte[] imageBytes = ConvertToBytes(file);
-
+                blog.Bimagen = imageBytes;
+            }
           
             if (ModelState.IsValid)
             {
                 blog.Bactive = true;
-                blog.Bimagen = imageBytes;
+               
                 db.Blog.Add(blog);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -69,11 +80,14 @@ namespace blog_challenge.Controllers
         // GET: Blogs/Edit/5
         public ActionResult Edit(int? id)
         {
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+
             Blog blog = db.Blog.Find(id);
+
             if (blog == null)
             {
                 return HttpNotFound();
@@ -86,12 +100,18 @@ namespace blog_challenge.Controllers
         // más detalles, vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Bid,Bttitle,Bcontent,BCategory,BDate,Bimage")] Blog blog)
+        public ActionResult Edit([Bind(Include = "Bid,Bttitle,Bcontent,BCategory,BDate,Bimagen")] Blog blog)
         {
+            HttpPostedFileBase file = Request.Files["ImageData"];
+            
+                byte[] imageBytes = ConvertToBytes(file);
+                blog.Bimagen = imageBytes;
+
             if (ModelState.IsValid)
             {
                 db.Entry(blog).State = EntityState.Modified;
                 blog.Bactive = true;
+            
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -188,18 +208,35 @@ namespace blog_challenge.Controllers
 
         private byte[] ConvertToBytes(HttpPostedFileBase image)
         {
-            try
+            if (image != null)
             {
                 byte[] imageBytes;
                 BinaryReader reader = new BinaryReader(image.InputStream);
                 imageBytes = reader.ReadBytes((int)image.ContentLength);
                 return imageBytes;
             }
-            catch (Exception)
+            else
             {
-                throw;
+                return null;
             }
 
         }
+        [AllowAnonymous]
+        public ActionResult RetrieveImage(int id)
+        {
+            Blog bgI = db.Blog.Find(id);
+
+            byte[] cover = bgI.Bimagen;
+
+            if (cover != null)
+            {
+                return File(cover, "image/jpg");
+            }
+            else
+            {
+                return null;
+            }
+        }
+
     }
 }

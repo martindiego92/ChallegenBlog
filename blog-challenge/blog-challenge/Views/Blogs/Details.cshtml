@@ -10,8 +10,14 @@
 <div>
 
 
-    <td>@Html.DisplayFor(modelItem => modelItem.Bcontent) </td>
-    <td>@Html.DisplayFor(modelItem => modelItem.Bimage)</td>
+
+    <td>
+        <img src="@Url.Action("RetrieveImage","Blogs",new {id=Model.Bid})" />
+    </td>
+    <div>
+        <td>@Html.DisplayFor(modelItem => modelItem.Bcontent) </td>
+    </div>
+
 
 </div>
 <p>

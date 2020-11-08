@@ -16,17 +16,20 @@
     {
         if(item.Bactive==true)
         { 
-        <tr>
+    <tr>
 
-            <td>
+        <td>
 
-                <a href="~/Blogs/Details/@item.Bid">   <b style="color:brown;font-size:30px;"> @Html.DisplayFor(modelItem => item.Bttitle)</b></a>
-            </td>
+            <a href="~/Blogs/Details/@item.Bid">   <b style="color:brown;font-size:30px;"> @Html.DisplayFor(modelItem => item.Bttitle)</b></a>
+        </td>
+        <td>
+            <img src="@Url.Action("RetrieveImage","Blogs",new {id=item.Bid})" />
+        </td>
 
         <td>@Html.DisplayFor(modelItem => item.BDate) </td>
 
 
-        </tr>
+    </tr>
 
 
         <td>

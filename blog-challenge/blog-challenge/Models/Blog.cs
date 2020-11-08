@@ -11,16 +11,26 @@ namespace blog_challenge.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Blog
     {
         public int Bid { get; set; }
+        [Required]
+        [Display(Name = "Tittle")]
         public string Bttitle { get; set; }
+        [Required]
+        [Display(Name = "Content")]
         public string Bcontent { get; set; }
+        [Display(Name = "Category")]
         public string BCategory { get; set; }
+        [Required]
+        [Display(Name = "Date")]
         public Nullable<System.DateTime> BDate { get; set; }
         public byte[] Bimage { get; set; }
         public Nullable<bool> Bactive { get; set; }
+       
+        [Display(Name = "Image")]
         public byte[] Bimagen { get; set; }
     }
 }
