@@ -14,19 +14,22 @@
 
     @foreach (var item in Model)
     {
-        if(item.Bid==20)
+        if(item.Bactive==true)
         { 
-        <tr>
+    <tr>
 
-            <td>
+        <td>
 
-                <a href="~/Blogs/Details/@item.Bid">   <b style="color:brown;font-size:30px;"> @Html.DisplayFor(modelItem => item.Bttitle)</b></a>
-            </td>
+            <a href="~/Blogs/Details/@item.Bid">   <b style="color:brown;font-size:40px;"> @Html.DisplayFor(modelItem => item.Bttitle)</b></a>
+        </td>
+        <td>
+            <img width="100px" src="@Url.Action("RetrieveImage","Blogs",new {id=item.Bid})" />
+        </td>
 
         <td>@Html.DisplayFor(modelItem => item.BDate) </td>
 
 
-        </tr>
+    </tr>
 
 
         <td>
@@ -41,7 +44,7 @@
                 @Html.ActionLink("Delete", "Delete", new { id = item.Bid })
             </td>
         </tr>
-    }
+        }
     }
 
 </table>

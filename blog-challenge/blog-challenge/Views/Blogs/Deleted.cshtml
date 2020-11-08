@@ -1,0 +1,45 @@
+﻿@model IEnumerable<blog_challenge.Models.Blog>
+
+@{
+    ViewBag.Title = "Deleted";
+}
+
+<h2>Deleted</h2>
+
+
+
+@using (Html.BeginForm())
+{
+  
+}
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Bttitle)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BDate)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        if (item.Bactive == false)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Bttitle)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BDate)
+                </td>
+                <td>
+                    @Html.ActionLink("Restore", "Edit", new { id = item.Bid }) |
+
+                </td>
+            </tr>
+        }
+    }
+
+</table>

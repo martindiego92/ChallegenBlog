@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<blog_challenge.Models.Blog>
 
 @{
-    ViewBag.Title = "search";
+    ViewBag.Title = "Search";
 }
 
 <h2>search</h2>
@@ -28,9 +28,11 @@
 
     @foreach (var item in Model)
     {
+        if(item.Bactive==true)
+        { 
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Bttitle)
+                <a href="~/Blogs/Details/@item.Bid">   <b style="color:brown;font-size:20px;"> @Html.DisplayFor(modelItem => item.Bttitle)</b></a>
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.BDate)
@@ -41,6 +43,7 @@
                 @Html.ActionLink("Delete", "Delete", new { id = item.Bid })
             </td>
         </tr>
+        }
     }
 
 </table>

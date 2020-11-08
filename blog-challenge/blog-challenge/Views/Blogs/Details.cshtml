@@ -5,16 +5,20 @@
 }
 
 
-<h2>@Html.DisplayFor(itemModel=>itemModel.Bttitle)</h2>
+<h2><b style="color:brown;font-size:40px;"> @Html.DisplayFor(modelItem => modelItem.Bttitle)</b></h2>
 
 <div>
+    <td>
+        <img src="@Url.Action("RetrieveImage","Blogs",new {id=Model.Bid})" />
+    </td>
+    
+    <div>
+        <td>@Html.DisplayFor(modelItem => modelItem.Bcontent) </td>
+    </div>
 
-
-    <td>@Html.DisplayFor(modelItem => modelItem.Bcontent) </td>
-    <td>@Html.DisplayFor(modelItem => modelItem.Bimage)</td>
 
 </div>
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.Bid }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Back to Blogs", "Index")
 </p>
