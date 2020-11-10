@@ -17,7 +17,7 @@ namespace blog_challenge.Controllers
     public class BlogsController : Controller
     {
         private blogEntities1 db = new blogEntities1();
-
+      
         // GET: Blogs
         public ActionResult Index()
 
@@ -88,6 +88,7 @@ namespace blog_challenge.Controllers
 
             Blog blog = db.Blog.Find(id);
 
+
             if (blog == null)
             {
                 return HttpNotFound();
@@ -102,16 +103,32 @@ namespace blog_challenge.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Bid,Bttitle,Bcontent,BCategory,BDate,Bimagen")] Blog blog)
         {
-            HttpPostedFileBase file = Request.Files["ImageData"];
-            
+            if (Request.Files["ImageData"].ContentLength >0 )
+            {
+                HttpPostedFileBase file = Request.Files["ImageData"];
                 byte[] imageBytes = ConvertToBytes(file);
                 blog.Bimagen = imageBytes;
 
+            }
+           else
+            {
+                using (var db = new blogEntities1())
+                {
+
+                    var blogDb = db.Blog.Find(blog.Bid);
+                    blog.Bimagen = blogDb.Bimagen;
+                   
+                }
+               
+
+            }
             if (ModelState.IsValid)
             {
+             
+                
                 db.Entry(blog).State = EntityState.Modified;
                 blog.Bactive = true;
-            
+               
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
